@@ -1,0 +1,187 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "healthcare-assistant"
+version = "1.0.0"
+description = "AI-Powered Healthcare Assistant for Early Disease Prediction"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Healthcare Assistant Team", email = "healthcare.assistant@example.com"}
+]
+maintainers = [
+    {name = "Healthcare Assistant Team", email = "healthcare.assistant@example.com"}
+]
+keywords = [
+    "healthcare",
+    "machine-learning", 
+    "disease-prediction",
+    "ai",
+    "medical",
+    "streamlit",
+    "flask",
+    "xgboost",
+    "scikit-learn"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "scikit-learn>=1.3.0",
+    "pandas>=2.0.3",
+    "numpy>=1.24.3",
+    "xgboost>=2.0.3",
+    "imbalanced-learn>=0.11.0",
+    "Flask>=2.3.3",
+    "Flask-CORS>=4.0.0",
+    "gunicorn>=21.2.0",
+    "streamlit>=1.50.0",
+    "streamlit-option-menu>=0.4.0",
+    "streamlit-aggrid>=1.1.9",
+    "matplotlib>=3.7.2",
+    "seaborn>=0.12.2",
+    "plotly>=5.17.0",
+    "altair>=5.1.2",
+    "requests>=2.31.0",
+    "python-decouple>=3.8",
+    "joblib>=1.3.2",
+    "Pillow>=10.4.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.3",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "black>=23.9.1",
+    "flake8>=6.1.0",
+    "isort>=5.12.0",
+    "mypy>=1.6.1",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.26.0",
+    "notebook>=7.0.6",
+    "locust>=2.17.0",
+    "memory-profiler>=0.61.0",
+    "bandit>=1.7.5",
+    "safety>=2.3.5",
+    "pre-commit>=3.5.0"
+]
+docs = [
+    "sphinx>=7.2.6",
+    "sphinx-rtd-theme>=1.3.0",
+    "mkdocs>=1.5.3",
+    "mkdocs-material>=9.4.8"
+]
+
+[project.urls]
+Homepage = "https://github.com/YOUR_USERNAME/Healthcare_Assistant"
+Documentation = "https://github.com/YOUR_USERNAME/Healthcare_Assistant#readme"
+Repository = "https://github.com/YOUR_USERNAME/Healthcare_Assistant.git"
+"Bug Tracker" = "https://github.com/YOUR_USERNAME/Healthcare_Assistant/issues"
+
+[project.scripts]
+healthcare-assistant = "app:main"
+train-models = "train_models:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+exclude = ["tests*", "docs*", "*.tests*", "*.tests.*", "tests.*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["healthcare_assistant"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--cov=.",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml"
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests"
+]
+
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "tests/*",
+    "venv/*",
+    "env/*",
+    ".venv/*",
+    ".env/*",
+    "*/site-packages/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod"
+]
