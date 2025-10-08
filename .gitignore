@@ -167,6 +167,10 @@ tmp/
 # Data files
 *.csv
 *.json
+!vercel.json
+!package.json
+!tsconfig.json
+!pyproject.toml
 *.xlsx
 *.parquet
 
