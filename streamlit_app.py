@@ -82,15 +82,10 @@ def load_ml_pipeline():
         st.error("Failed to load ML models. Please ensure models are trained first.")
         return None
 
-@st.cache_data
 def get_api_health():
-    """Check API health status"""
-    try:
-        response = requests.get("http://localhost:5000/health", timeout=5)
-        return response.status_code == 200, response.json() if response.status_code == 200 else None
-    except:
-        return False, None
-
+    """Not used in cloud deployment"""
+    return True, None
+    
 def main():
     """Main Streamlit application"""
     
@@ -143,10 +138,11 @@ def show_dashboard(ml_pipeline, api_healthy, api_info):
     # Status indicators
     col1, col2, col3, col4 = st.columns(4)
     
-    with col1:
+   with col1:
+        models_loaded = len(ml_pipeline.models) if ml_pipeline else 0
         st.metric(
-            label="API Status",
-            value="🟢 Online" if api_healthy else "🔴 Offline",
+            label="System Status",
+            value="🟢 Ready" if models_loaded == 3 else "🔴 Not Ready",
             delta=None
         )
     
