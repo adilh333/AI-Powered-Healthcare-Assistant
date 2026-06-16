@@ -159,8 +159,7 @@ tmp/
 *.tmp
 
 # Model files (too large for GitHub)
-*.pkl
-*.joblib
+
 *.h5
 *.hdf5
 
